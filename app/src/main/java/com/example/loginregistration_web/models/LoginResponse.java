@@ -4,20 +4,20 @@ public class LoginResponse {
 
     private boolean error;
     private String message;
-    private int UserID;
-    private String UserName;
-    private String FirstName;
-    private String LastName;
-    private String Email;
+    private String userid;
+    private String username;
+    private String firstname;
+    private String lastname;
+    private String email;
 
-    public LoginResponse(boolean error, String message, int userID, String userName, String firstName, String lastName, String email) {
+    public LoginResponse(boolean error, String message, String userid, String username, String firstname, String lastname, String email) {
         this.error = error;
         this.message = message;
-        UserID = userID;
-        UserName = userName;
-        FirstName = firstName;
-        LastName = lastName;
-        Email = email;
+        this.userid = userid;
+        this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
     }
 
     public boolean isError() {
@@ -28,25 +28,26 @@ public class LoginResponse {
         return message;
     }
 
-    public int getUserID() {
-        return UserID;
+    public String getUserid() {
+        return userid;
     }
 
-    public String getUserName() {
-        return UserName;
+    public String getUsername() {
+        return username;
     }
 
-    public String getFirstName() {
-        return FirstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public String getLastName() {
-        return LastName;
+    public String getLastname() {
+        return lastname;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
+
 
 
 }

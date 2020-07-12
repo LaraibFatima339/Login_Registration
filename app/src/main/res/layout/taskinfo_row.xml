@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/cardview"
+    app:cardBackgroundColor="#ffff"
+    app:cardCornerRadius="10dp"
+    android:layout_margin="5dp"
+    app:cardElevation="5dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/taskname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="taskname"
+            android:layout_marginLeft ="30dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#000"
+            android:textSize="20dp"
+            />
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="description"
+            android:layout_marginLeft ="30dp"
+            android:textColor="#000"
+            android:textSize="20dp"
+            />
+
+            <TextView
+                android:id="@+id/duedate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="duedate"
+                android:layout_marginLeft ="30dp"
+                android:textColor="#000"
+                android:textSize="20dp"
+                android:layout_marginBottom="5dp"
+                />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnOpenTask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+
+            android:layout_marginLeft="130dp"
+            android:background="@drawable/round_button"
+            android:text="OPEN"
+            android:textColor="#fff"
+
+            android:textSize="15dp" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

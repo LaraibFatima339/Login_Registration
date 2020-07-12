@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">LoginRegistration_Web</string>
+    <string name="Previous"><![CDATA[<<]]></string>
+    <string name="Next"><![CDATA[>>]]></string>
 </resources>

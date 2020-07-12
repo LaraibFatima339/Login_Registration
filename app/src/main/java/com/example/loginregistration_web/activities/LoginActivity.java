@@ -87,15 +87,18 @@ public class LoginActivity extends AppCompatActivity {
 
                             SharedPrefManager.getInstance(getApplicationContext())
                             .saveUser(
-                                 loginResponse.getUserID() ,
-                                    loginResponse.getUserName(),
-                                    loginResponse.getFirstName(),
-                                    loginResponse.getLastName() ,
+                                 loginResponse.getUserid() ,
+                                    loginResponse.getUsername(),
+                                    loginResponse.getFirstname(),
+                                    loginResponse.getLastname() ,
                                     loginResponse.getEmail()
                             ) ;
 
-                            startActivity(new Intent (getApplicationContext(), MainActivity.class)) ;
+                            Intent home = new Intent(getApplicationContext(), MainActivity.class);
+                             //home.putExtra("userid", loginResponse.getUserid());
+                            startActivity(home) ;
                             finish();
+                            Toast.makeText(getApplicationContext(), " userid from api"+ loginResponse .getUserid() , Toast.LENGTH_SHORT ).show();
 
 
                             Toast.makeText(getApplicationContext(), loginResponse .getMessage() , Toast.LENGTH_SHORT ).show();
