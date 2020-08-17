@@ -3,6 +3,10 @@ package com.example.loginregistration_web.models;
 import com.google.gson.annotations.SerializedName;
 
 public class TaskDetails {
+
+    @SerializedName("userid")
+    private String userid;
+
     @SerializedName("username")
     private String username;
 
@@ -20,7 +24,8 @@ public class TaskDetails {
     private String duedate;
 
 
-    public TaskDetails(String username, String taskid, String taskname, String description, String duedate) {
+    public TaskDetails(String userid, String username, String taskid, String taskname, String description, String duedate) {
+        this.userid = userid;
         this.username = username;
         this.taskid = taskid;
         this.taskname = taskname;
@@ -28,11 +33,17 @@ public class TaskDetails {
         this.duedate = duedate;
     }
 
+    public String getUserid() {
+        return userid;
+    }
+
     public String getUsername() {
         return username;
     }
 
-    public String getTaskid () { return taskid;}
+    public String getTaskid() {
+        return taskid;
+    }
 
     public String getTaskname() {
         return taskname;
@@ -45,5 +56,4 @@ public class TaskDetails {
     public String getDuedate() {
         return duedate;
     }
-
 }

@@ -3,71 +3,77 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/cardview"
-    app:cardBackgroundColor="#ffff"
+    app:cardBackgroundColor="@android:color/white"
     app:cardCornerRadius="10dp"
     android:layout_margin="5dp"
     app:cardElevation="5dp"
     >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="5dp"
+      >
 
 
-            <TextView
-                android:id="@+id/cardname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="cardname"
-                android:layout_marginLeft ="30dp"
-                android:layout_marginTop="5dp"
-                android:textColor="#000"
-                android:textSize="20dp"
-                />
-            <TextView
-                android:id="@+id/description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="description"
-                android:layout_marginLeft ="30dp"
-                android:textColor="#000"
-                android:textSize="20dp"
-                />
+      <TextView
+          android:id="@+id/cardname"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="4dp"
+          android:text="Cardname"
+          android:textColor="#000"
+          android:textSize="20dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.051"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/points"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="points"
-                android:layout_marginLeft ="30dp"
-                android:textColor="#000"
-                android:textSize="20dp"
-                android:layout_marginBottom="5dp"
-                />
+      <TextView
+          android:id="@+id/description"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Description"
+          android:textColor="#000"
+          android:textSize="20dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.066"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/cardname" />
+
+      <TextView
+          android:id="@+id/points"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Points"
+          android:textColor="#000"
+          android:textSize="20dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.046"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/description" />
+
+      <Button
+          android:id="@+id/btnOpenCard"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_vertical"
 
 
-        </LinearLayout>
+          android:layout_marginTop="20dp"
+          android:background="@drawable/round_button"
+          android:text="OPEN"
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="OPEN"
-            android:layout_gravity="center_vertical"
+          android:textColor="#fff"
+          android:textSize="15dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.869"
+          app:layout_constraintStart_toEndOf="@+id/description"
+          app:layout_constraintTop_toTopOf="parent" />
 
-            android:layout_marginLeft="50dp"
-            android:textColor="#fff"
-            android:background="@drawable/round_button"
-            android:textSize="15dp"
-
-            android:id="@+id/btnOpenCard"/>
-    </LinearLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

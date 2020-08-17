@@ -2,6 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/OptionLogout"
-        android:title="Logout" />
+        android:id="@+id/OptionHome"
+        android:title="Home"
+        android:icon="@drawable/ic_home"
+        />
+
+    <item
+        android:id="@+id/OptionUploaded"
+        android:title="Uploaded Glyphs"
+        android:icon="@drawable/ic_check"
+
+        />
+
+    <item
+        android:id="@+id/OptionSetting"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings"/>
 </menu>

@@ -3,59 +3,68 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/cardview"
-    app:cardBackgroundColor="#ffff"
+    app:cardBackgroundColor="@android:color/white"
     app:cardCornerRadius="10dp"
     android:layout_margin="5dp"
     app:cardElevation="5dp"
     >
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
 
 
         <TextView
             android:id="@+id/taskname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+
+            android:layout_marginEnd="282dp"
+            android:layout_marginRight="282dp"
             android:text="taskname"
-            android:layout_marginLeft ="30dp"
-            android:layout_marginTop="5dp"
             android:textColor="#000"
             android:textSize="20dp"
-            />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
             android:text="description"
-            android:layout_marginLeft ="30dp"
             android:textColor="#000"
             android:textSize="20dp"
-            />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/taskname" />
 
-            <TextView
-                android:id="@+id/duedate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="duedate"
-                android:layout_marginLeft ="30dp"
-                android:textColor="#000"
-                android:textSize="20dp"
-                android:layout_marginBottom="5dp"
-                />
-
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/duedate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:text="duedate"
+            android:textColor="#000"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description" />
 
         <Button
             android:id="@+id/btnOpenTask"
@@ -63,11 +72,47 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
 
-            android:layout_marginLeft="130dp"
+
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="52dp"
+            android:layout_marginRight="52dp"
+
             android:background="@drawable/round_button"
             android:text="OPEN"
             android:textColor="#fff"
+            android:textSize="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            android:textSize="15dp" />
-    </LinearLayout>
+        <ProgressBar
+            android:id="@+id/pbId"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="8dp"
+
+            android:maxWidth="300dp"
+            android:progressBackgroundTint="#d3d3d3"
+
+            android:progressTint="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/duedate" />
+
+        <TextView
+            android:id="@+id/tvId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textSize="15dp"
+            android:layout_marginTop="72dp"
+            android:text="%"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.945"
+            app:layout_constraintStart_toEndOf="@+id/duedate"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.cardview.widget.CardView>

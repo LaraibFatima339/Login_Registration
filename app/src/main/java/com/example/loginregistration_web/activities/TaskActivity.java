@@ -1,16 +1,24 @@
 package com.example.loginregistration_web.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.loginregistration_web.Adapters.TaskDetailsAdapter;
 import com.example.loginregistration_web.R;
+import com.example.loginregistration_web.Storage.SharedPrefManager;
 import com.example.loginregistration_web.models.TaskDetails;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,13 +37,40 @@ public class TaskActivity extends AppCompatActivity {
     String userid;
     String progresstype;
     TextView tvProgresstypeTitle;
-
+    BottomNavigationView bottomNavigationView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
+
+        bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch(menuItem.getItemId()){
+                    case R.id.OptionHome:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class)) ;
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            finishAffinity();
+                        }
+                        break;
+
+
+                    case R.id.OptionUploaded:
+                        startActivity(new Intent (getApplicationContext(), UploadedActivity.class)) ;
+                        break;
+
+                    case R.id.OptionSetting:
+                        startActivity(new Intent (getApplicationContext(), SettingsActivity.class)) ;
+                        break;
+
+
+                }
+                return true;
+            }
+        });
 
         tvProgresstypeTitle = findViewById(R.id.progresstypeTitle);
 
@@ -52,15 +87,6 @@ public class TaskActivity extends AppCompatActivity {
         tvProgresstypeTitle.setText(progresstype);
 
 
-       // Toast.makeText(this, userid+" ", Toast.LENGTH_SHORT).show();
-        //Toast.makeText(this, progresstype+" ", Toast.LENGTH_SHORT).show();
-
-        //Log.i("Check", userid);
-
-
-//        RetrofitClient apiService = RetrofitClient..getInstance()
-//                .getApi().create(ApiInterface.class);
-//        Call<List<TaskCardInfo >> call = apiService.getItems(userid, progresstype);
 
         Call<List<TaskDetails>> call = getInstance()
                 .getApi()
@@ -86,5 +112,45 @@ public class TaskActivity extends AppCompatActivity {
                 Log.d("TAG","Response = "+t.toString());
             }
         });
+
+
+
+
+
+
+
     }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater menuInflater = new MenuInflater(this);
+//        menuInflater.inflate(R.menu.mainmenu, menu );
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        //int id = item.getItemId();
+//
+//        switch(item.getItemId()){
+//            case R.id.OptionHome:
+//                startActivity(new Intent (getApplicationContext(), MainActivity.class)) ;
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+//                    finishAffinity();
+//                }
+//                break;
+//
+//            case R.id.OptionUploaded:
+//                startActivity(new Intent (getApplicationContext(), UploadedActivity.class)) ;
+//                break;
+//
+//            case R.id.OptionSetting:
+//                startActivity(new Intent(getApplicationContext(), SettingsActivity.class)) ;
+//                break;
+//
+//
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 }

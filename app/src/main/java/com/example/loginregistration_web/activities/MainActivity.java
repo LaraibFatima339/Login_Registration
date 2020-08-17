@@ -22,6 +22,7 @@ import com.example.loginregistration_web.Storage.SharedPrefManager;
 import com.example.loginregistration_web.api.RetrofitClient;
 import com.example.loginregistration_web.models.LoginResponse;
 import com.example.loginregistration_web.models.ProgressPercent;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,12 +37,36 @@ public class MainActivity extends AppCompatActivity {
     String tTitle[]={"All Tasks","New Task","In Progress","Completed"};
     int[] tImages={R.drawable.totaltask,R.drawable.newtaskt,R.drawable.inprogresspq, R.drawable.taskcomplete };
     String[] percent={"0","0","0","0"} ;
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tvUsername = findViewById(R.id.tv);
+        bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch(menuItem.getItemId()){
+                    case R.id.OptionHome:
+                        // startActivity(new Intent (getApplicationContext(), MainActivity.class)) ;
+
+                        break;
+
+                    case R.id.OptionUploaded:
+                        startActivity(new Intent (getApplicationContext(), UploadedActivity.class)) ;
+                        break;
+
+                    case R.id.OptionSetting:
+                        startActivity(new Intent (getApplicationContext(), SettingsActivity.class)) ;
+                        break;
+
+
+                }
+                return true;
+            }
+        });
 
         LoginResponse user = SharedPrefManager .getInstance(this).getUser() ;
         tvUsername.setText(" " + user.getUsername() ) ;
@@ -145,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     protected void onStart() {
          super.onStart() ;
@@ -154,23 +180,41 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = new MenuInflater(this);
-        menuInflater.inflate(R.menu.mainmenu, menu );
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if(id == R.id.OptionLogout){
-            SharedPrefManager.getInstance(getApplicationContext()).clear();
-            startActivity(new Intent (getApplicationContext(), LoginActivity.class)) ;
-            finish();
-
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater menuInflater = new MenuInflater(this);
+//        menuInflater.inflate(R.menu.mainmenu, menu );
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        //int id = item.getItemId();
+//
+//        switch(item.getItemId()){
+//            case R.id.OptionHome:
+//               // startActivity(new Intent (getApplicationContext(), MainActivity.class)) ;
+//
+//                break;
+//
+//            case R.id.OptionUploaded:
+//                startActivity(new Intent (getApplicationContext(), UploadedActivity.class)) ;
+//                break;
+//
+//            case R.id.OptionSetting:
+//                startActivity(new Intent (getApplicationContext(), SettingsActivity.class)) ;
+//                break;
+//
+//
+//        }
+//
+////        if(id == R.id.OptionLogout){
+////            SharedPrefManager.getInstance(getApplicationContext()).clear();
+////            startActivity(new Intent (getApplicationContext(), LoginActivity.class)) ;
+////            finish();
+////
+////
+////        }
+//        return super.onOptionsItemSelected(item);
+//    }
 }

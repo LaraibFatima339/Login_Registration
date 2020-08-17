@@ -13,6 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activities.UploadedActivity"></activity>
+        <activity android:name=".activities.SettingsActivity" />
         <activity android:name=".activities.HandwritingActivity" />
         <activity android:name=".activities.CardActivity" />
         <activity android:name=".activities.TaskActivity" />

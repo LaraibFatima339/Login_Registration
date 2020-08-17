@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
@@ -17,11 +18,18 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.example.loginregistration_web.Storage.SharedPrefManager;
+import com.example.loginregistration_web.models.LoginResponse;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MyCanvas extends View {
@@ -30,18 +38,22 @@ public class MyCanvas extends View {
     Paint mPaint;
     Path mPath;
 
+    Paint dashPaint;
+
+
     //new
     Paint mBitmapPaint = new Paint(Paint.DITHER_FLAG);
     //
 
 
-    Bitmap mBitmap;
+    Bitmap mBitmap= null;
 
     Canvas mCanvas;
 
     //ArrayList<Draw>
 
     List<Point> points = new ArrayList() ;
+    String userid;
 
     //new
     public static final int DEFAULT_BG_COLOR= Color.WHITE;
@@ -56,7 +68,7 @@ public class MyCanvas extends View {
 
     ArrayList<Draw> paths = new ArrayList<>();
 
-
+    public static int height, width;
 
 
 
@@ -79,19 +91,39 @@ public class MyCanvas extends View {
         mPaint.setAlpha(0xff);
 
 
+        LoginResponse user = SharedPrefManager.getInstance(this.context).getUser() ;
+        userid = user.getUserid();
+
+        dashPaint = new Paint();
+        dashPaint.setColor(Color.RED);
+        dashPaint.setStyle(Paint.Style.STROKE);
+        dashPaint.setPathEffect(new DashPathEffect(new float[]{30, 10}, 1));
+
+
 
     }
 
 
     //new
-    public void initialize (DisplayMetrics displayMetrics){
+    public void initialize (){
 
-        int height = displayMetrics.heightPixels;
-        int width = displayMetrics.widthPixels;
+       height = getHeight();
+        width = getWidth();
+        Toast.makeText(context, "Height:"+ height+"  width: "+ width, Toast.LENGTH_SHORT).show();
 
-        mBitmap = Bitmap.createBitmap(width,height, Bitmap.Config.ARGB_8888);
-        mCanvas = new Canvas(mBitmap);
+//        int height = displayMetrics.heightPixels;
+//        int width = displayMetrics.widthPixels;
 
+      //  mBitmap = Bitmap.createBitmap(width,height, Bitmap.Config.ARGB_8888);
+if (mBitmap==null) {
+    mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+    mCanvas = new Canvas(mBitmap);
+
+
+    //draw a red colour dotted line
+//    mCanvas.drawLine(1,350, width,350, dashPaint);
+
+}
         currentColor= DEFAULT_COLOR;
         strokeWidth= BRUSH_SIZE;
 
@@ -122,7 +154,16 @@ public class MyCanvas extends View {
             mCanvas.drawPath(draw.path, mPaint);
         }
 
+        int y_height = height/2;
+        int x_width= width;
+        if(y_height%2!=0){
+           y_height++;
+        }
+        if(x_width%2 !=0){
+            x_width++;
+        }
 
+      mCanvas.drawLine(0,y_height , x_width, y_height, dashPaint);
 
 //        mcanvas = canvas;
 //        if(cc){
@@ -133,6 +174,8 @@ public class MyCanvas extends View {
 //
 //            //  mcanvas.drawRect(50,50,400,250, paint);
 //            cc = false;
+
+        //mCanvas.drawRect(50,50,400,250, dashPaint);
 //        }
 
 
@@ -179,9 +222,23 @@ public class MyCanvas extends View {
 
 
 
-    public void showArray(){
+    public String savePoints(){
 
         Log.d("Values","Array: "+ points) ;
+        // JSONArray jsonArray = new JSONArray(List.asList(points))
+        int[] pointsXArray = new int[points.size()];
+        int[] pointsYArray = new int[points.size()];
+        int i=0;
+        for (Point point:points) {
+            pointsXArray[i] = point.x;
+            pointsYArray[i] = point.y;
+            i++;
+        }
+        String jsonX = new Gson().toJson(pointsXArray);
+        String jsonY = new Gson().toJson(pointsXArray);
+        Log.d("Values","Json: "+ jsonX + "|" + jsonY) ;
+
+        return jsonX +"|"+ jsonY;
 
     }
 
@@ -259,12 +316,15 @@ public class MyCanvas extends View {
     }
 
 
-    public void saveImage(){
+    public String saveImage(){
+
+    String filename = "";
+
         int count = 0;
 
         File sdDirectory = Environment.getExternalStorageDirectory();
 
-        String dirName = "My Data";
+        String dirName = "UrduGlyph";
         File subDirectory = new File(sdDirectory, dirName);
 
         if (subDirectory.exists()) {
@@ -301,8 +361,9 @@ public class MyCanvas extends View {
 
 
             File image = new File(subDirectory, "/drawing_" + (count + 1) + ".png");
+             filename = subDirectory+"/drawing_" + (count + 1) + ".png";
             FileOutputStream fileOutputStream;
-            Toast.makeText(getContext(), sdDirectory.getAbsolutePath(), Toast.LENGTH_LONG).show();
+           // Toast.makeText(getContext(), sdDirectory.getAbsolutePath(), Toast.LENGTH_LONG).show();
 
 
             try {
@@ -316,6 +377,8 @@ public class MyCanvas extends View {
 
                 Toast.makeText(getContext(), "saved", Toast.LENGTH_LONG).show();
 
+
+
             } catch (FileNotFoundException e) {
 
 
@@ -325,10 +388,16 @@ public class MyCanvas extends View {
             }
 
         }
-
+        return filename;
     }
 
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        initialize();
 
+    }
 //    String message= String.format("Coordinates:(%.2f, %.2f)", xPos,yPos);
+    //https://github.com/Dysgenix/Paint/blob/master/app/src/main/java/com/example/paint/PaintView.java
 
 }

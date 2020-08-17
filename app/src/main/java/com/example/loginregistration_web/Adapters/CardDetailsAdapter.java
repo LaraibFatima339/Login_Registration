@@ -2,6 +2,7 @@ package com.example.loginregistration_web.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,10 +28,14 @@ public class CardDetailsAdapter extends RecyclerView.Adapter<CardDetailsAdapter.
 
     List<CardDetails> cardDetailsList;
     ArrayList<String> cards = new ArrayList<>();
+    String taskid;
 
-    public CardDetailsAdapter(Context context, List<CardDetails>cardDetailsList) {
+    ArrayList<String> cardsid = new ArrayList<>();
+
+    public CardDetailsAdapter(Context context, List<CardDetails>cardDetailsList, String taskid) {
         this.context = context;
         this.cardDetailsList  = cardDetailsList;
+        this.taskid = taskid;
     }
 
     public void setItemList(List<CardDetails> cardDetailsList) {
@@ -53,14 +58,17 @@ public class CardDetailsAdapter extends RecyclerView.Adapter<CardDetailsAdapter.
 
         holder.tvCardname .setText(cardDetailsList.get(position).getText() );
         holder.tvDescription  .setText(cardDetailsList.get(position).getDescription());
-        holder.tvPoints.setText(cardDetailsList.get(position).getPoints());
+        holder.tvPoints.setText("Points: "+cardDetailsList.get(position).getPoints());
 
-        final String check = cardDetailsList.get(position).getText();
+
 
        // final String[] cards= new Array<String>();
 
 
-        cards.add(cardDetailsList.get(position).getText()+"");
+        cardsid.add(cardDetailsList.get(position).getCardid()+"");
+        cards.add(cardDetailsList.get(position).getText()+"");   //Here getText is function of cardDetailsList class
+
+
 
        // final ArrayList<String> cards = new ArrayList<>();
        // cards.add(position,cardDetailsList.get(position).getText());
@@ -75,13 +83,12 @@ public class CardDetailsAdapter extends RecyclerView.Adapter<CardDetailsAdapter.
         holder.btnOpenCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, " You Clicked the "+ cards.get(position), Toast.LENGTH_LONG ).show();
-
-                Toast.makeText(context, " Cards are "+ cards,Toast.LENGTH_LONG ).show();
-
 
                 Intent cardIntent = new Intent(context, HandwritingActivity.class);
 
+                cardIntent.putExtra("taskid",taskid);
+
+                cardIntent.putExtra("cardsid",cardsid);
                 cardIntent.putExtra("cards",cards);
                 cardIntent.putExtra("position",position);
                 //cardIntent.putExtra("cardid",cardid);

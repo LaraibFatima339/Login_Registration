@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                              //home.putExtra("userid", loginResponse.getUserid());
                             startActivity(home) ;
                             finish();
-                            Toast.makeText(getApplicationContext(), " userid from api"+ loginResponse .getUserid() , Toast.LENGTH_SHORT ).show();
+//                            Toast.makeText(getApplicationContext(), " userid from api"+ loginResponse .getUserid() , Toast.LENGTH_SHORT ).show();
 
 
                             Toast.makeText(getApplicationContext(), loginResponse .getMessage() , Toast.LENGTH_SHORT ).show();
